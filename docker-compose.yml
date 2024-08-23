@@ -1,0 +1,13 @@
+version: "4.26"
+services:
+  server:
+    container_name: server
+    restart: unless-stopped
+    # environment:
+    #   - NODE_ENV=production
+    build:
+      context: ./
+    ports:
+      - 8080:8080
+    # env_file: # .env file that sits beside this file
+    #   - .env 
