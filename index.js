@@ -18,6 +18,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/health", async (req, res) => {
+  res.json("OK");
+});
+
 app.post("/", async (req, res) => {
   const requestData = req.body;
 
