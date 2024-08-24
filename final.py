@@ -32,14 +32,16 @@ def predict_disease_from_symptoms(symptom_vector, confidence_threshold=0.5):
     max_prob = np.max(probabilities)
     predicted_index = np.argmax(probabilities)
     
-    if max_prob >= confidence_threshold:
-        # Decode the prediction to get the disease name
-        predicted_disease = loaded_encoder.inverse_transform([predicted_index])[0]
-        return f"Predicted Disease: {predicted_disease} with confidence {100 * max_prob:.2f}%"
-    else:
-        return f"Prediction confidence ({max_prob:.2f}) is below the threshold of {confidence_threshold * 100}%."
+    predicted_disease = loaded_encoder.inverse_transform([predicted_index])[0]
+    return [predicted_disease, '%.2f' % max_prob]
+    # if max_prob >= confidence_threshold:
+    #     predicted_disease = loaded_encoder.inverse_transform([predicted_index])[0]
+    #     # Decode the prediction to get the disease name
+    #     return f"Predicted Disease: {predicted_disease} with confidence {100 * max_prob:.2f}%"
+    # else:
+    #     return f"Prediction confidence ({max_prob:.2f}) is below the threshold of {confidence_threshold * 100}%."
     
-print(predict_disease_from_symptoms(json.loads(sys.argv[1])))
+print(json.dumps(predict_disease_from_symptoms(json.loads(sys.argv[1]))))
 
 # example_symptoms = [0] * (data.shape[1] - 1)
 # Replace with actual symptoms
