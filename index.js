@@ -35,7 +35,7 @@ app.post("/", async (req, res) => {
   // getting what python file prints and return it to the client
   try {
     const result = await PythonShell.run("final.py", options);
-    console.log(result[0]);
+
     res.json(JSON.parse(result[0]));
   } catch (err) {
     logger.error(err);
